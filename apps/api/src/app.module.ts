@@ -9,10 +9,14 @@ import { invoiceRepositoryProvider } from "./infrastructure/persistence/persiste
 
 import { cacheProvider } from "./infrastructure/cache/cache.providers";
 
+import { OUTBOX } from "./application/ports/outbox.token";
+import { InMemoryOutbox } from "./infrastructure/persistence/in-memory/in-memory-outbox";
+
 @Module({
   controllers: [HealthController, InvoicesController],
   providers: [
     invoiceRepositoryProvider,
+    { provide: OUTBOX, useClass: InMemoryOutbox },
     IssueInvoiceHandler,
     SearchInvoicesHandler,
     cacheProvider,
