@@ -5,6 +5,7 @@ export class Money {
     readonly amountMinor: bigint,
     readonly currency: string,
   ) {}
+
   static create(amountMinor: bigint, currency: string): Money {
     const code = currency.trim().toUpperCase();
     if (amountMinor < 0n)
