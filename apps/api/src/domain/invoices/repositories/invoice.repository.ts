@@ -1,4 +1,4 @@
-import { Invoice } from "../entities/invoice";
+import type { Invoice } from "./../entities/invoice";
 
 export interface InvoiceRepository {
   save(invoice: Invoice): Promise<void>;
@@ -8,5 +8,5 @@ export interface InvoiceRepository {
     query: string,
     page: number,
     limit: number,
-  ): Promise<Invoice[]>;
+  ): Promise<readonly Invoice[]>;
 }
