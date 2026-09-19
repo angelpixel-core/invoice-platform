@@ -10,6 +10,7 @@ export class IssueInvoiceHandler {
   constructor(
     @Inject(INVOICE_REPOSITORY) private readonly invoices: InvoiceRepository,
   ) {}
+
   async execute(c: IssueInvoiceCommand): Promise<{ id: string }> {
     const invoice = Invoice.issue({
       tenantId: c.tenantId,
