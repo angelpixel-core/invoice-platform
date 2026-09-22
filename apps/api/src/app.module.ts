@@ -1,25 +1,16 @@
 import { Module } from "@nestjs/common";
+import { PersistenceModule } from "./infrastructure/shared/persistence/persistence.module";
 
-import { HealthController } from "./interfaces/http/health/health-controller";
+// import { HealthController } from "./interfaces/http/health/health.controller";
 
-import { InvoicesController } from "./interfaces/http/invoices/invoices.controller";
-import { IssueInvoiceHandler } from "./application/commands/issue-invoice/issue-invoice.handler";
-import { SearchInvoicesHandler } from "./application/queries/search-invoices/search-invoices.handler";
-import { invoiceRepositoryProvider } from "./infrastructure/persistence/persistence.providers";
+// import { InvoicesModule } from "./interfaces/http/invoices/invoices.module";
 
-import { cacheProvider } from "./infrastructure/cache/cache.providers";
-
-import { OUTBOX } from "./application/ports/outbox.token";
-import { InMemoryOutbox } from "./infrastructure/persistence/in-memory/in-memory-outbox";
+// import { messagingProviders } from "./infrastructure/messaging/messaging.module";
 
 @Module({
-  controllers: [HealthController, InvoicesController],
-  providers: [
-    invoiceRepositoryProvider,
-    { provide: OUTBOX, useClass: InMemoryOutbox },
-    IssueInvoiceHandler,
-    SearchInvoicesHandler,
-    cacheProvider,
-  ],
+  imports: [PersistenceModule.register()],
+  // imports: [InvoicesModule],
+  // controllers: [HealthController],
+  // providers: [...messagingProviders],
 })
 export class AppModule {}
